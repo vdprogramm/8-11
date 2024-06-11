@@ -1,0 +1,26 @@
+using System;
+using System.IO;
+
+class FileReadWrite
+{
+    static void Main()
+    {
+        // Get file name and content from user
+        Console.Write("Enter the filename: ");
+        string fileName = Console.ReadLine();
+
+        Console.Write("Enter the content to write to the file: ");
+        string content = Console.ReadLine();
+
+        // Write content to file
+        File.WriteAllText(fileName, content);
+        Console.WriteLine("Content written to file successfully.");
+
+        // Read content from file
+        string fileContent = File.ReadAllText(fileName);
+        
+        // Display the content read from the file
+        Console.WriteLine("\nContent read from the file:");
+        Console.WriteLine(fileContent);
+    }
+}

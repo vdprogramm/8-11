@@ -1,0 +1,59 @@
+using System;
+
+class StringManipulations
+{
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("\nChoose an option:");
+            Console.WriteLine("1. Reverse a string");
+            Console.WriteLine("2. Count words in a string");
+            Console.WriteLine("3. Exit");
+            Console.Write("Enter your choice: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    ReverseString();
+                    break;
+                case "2":
+                    CountWords();
+                    break;
+                case "3":
+                    return;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    static void ReverseString()
+    {
+        Console.Write("\nEnter a string: ");
+        string input = Console.ReadLine();
+        
+        // Reverse the string
+        char[] charArray = input.ToCharArray();
+        Array.Reverse(charArray);
+        string reversedString = new string(charArray);
+        
+        Console.WriteLine("Reversed string: " + reversedString);
+    }
+
+    static void CountWords()
+    {
+        Console.Write("\nEnter a string: ");
+        string input = Console.ReadLine();
+        
+        // Split the string into words
+        string[] words = input.Split(new char[] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+        
+        // Count the number of words
+        int wordCount = words.Length;
+        
+        Console.WriteLine("Number of words: " + wordCount);
+    }
+}

@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+class CombinedProgram
+{
+    static void Main()
+    {
+        while (true)
+        {
+            Console.WriteLine("\nChoose an option:");
+            Console.WriteLine("1. Display ASCII Table");
+            Console.WriteLine("2. Display UTF-8 Table (Code Page 65001)");
+            Console.WriteLine("3. Beep on Space Press");
+            Console.WriteLine("4. Count Character Occurrences in a String");
+            Console.WriteLine("5. Exit");
+            Console.Write("Enter your choice: ");
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    DisplayASCIITable();
+                    break;
+                case "2":
+                    DisplayUTF8Table();
+                    break;
+                case "3":
+                    BeepOnSpace();
+                    break;
+                case "4":
+                    CountCharacterOccurrences();
+                    break;
+                case "5":
+                    return;
+                default:
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    break;
+            }
+        }
+    }
+
+    static void DisplayASCIITable()
+    {
+        Console.WriteLine("\nASCII Table:");
+        for (int i = 0; i <= 127; i++)
+        {
+            Console.WriteLine("{0,3}: {1}", i, (char)i);
+        }
+    }
+
+    static void DisplayUTF8Table()
+    {
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.WriteLine("\nUTF-8 Table (Code Page 65001):");
+
+        for (int i = 0; i <= 255; i++)
+        {
+            byte[] bytes = new byte[] { (byte)i };
+            string utf8Char = Encoding.UTF8.GetString(bytes);
+            Console.WriteLine("{0,3}: {1}", i, utf8Char);
+        }
+    }
+
+    static void BeepOnSpace()
+    {
+        Console.WriteLine("\nPress space to beep. Press ESC to return to the menu.");
+        while (true)
+        {
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Spacebar)
+            {
+                Console.Beep();
+            }
+            else if (key.Key == ConsoleKey.Escape)
+            {
+                break;
+            }
+        }
+    }
+
+    static void CountCharacterOccurrences()
+    {
+        Console.Write("\nEnter a string: ");
+        string input = Console.ReadLine();
+
+        Dictionary<char, int> charCount = new Dictionary<char, int>();
+
+        foreach (char c in input)
+        {
+            if (charCount.ContainsKey(c))
+            {
+                charCount[c]++;
+            }
+            else
+            {
+                charCount[c] = 1;
+            }
+        }
+
+        Console.WriteLine("Character Count:");
+        foreach (var item in charCount)
+        {
+            Console.WriteLine("{0}: {1}", item.Key, item.Value);
+        }
+    }
+}
